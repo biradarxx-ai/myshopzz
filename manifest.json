@@ -1,0 +1,17 @@
+{
+  "name": "MyShop Pro",
+  "short_name": "MyShop",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#22c55e",
+  "orientation": "portrait",
+  "description": "Shop Attendance Tracker",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
