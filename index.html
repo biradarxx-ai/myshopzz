@@ -1,42 +1,77 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MyShop Pro</title>
-
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
-
-<meta name="theme-color" content="#4CAF50">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>माउली पान शॉप</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
-
 <body>
+  <div class="container">
+    <header>माउली पान शॉप</header>
 
-<div class="container">
+    <!-- Login -->
+    <div id="login-screen">
+      <h2>🔐 Login</h2>
+      <input type="password" id="password" placeholder="Password Daalo" class="input">
+      <button onclick="login()" class="big-btn">Login</button>
+      <p id="login-msg"></p>
+    </div>
 
-<h1>🛒 MyShop Pro</h1>
+    <!-- Main App -->
+    <div id="main-app" class="hidden">
+      <div class="user-info" id="user-info"></div>
 
-<div class="card">
+      <div class="tabs">
+        <button onclick="showTab(0)" class="tab-btn active">🏠 होम</button>
+        <button onclick="showTab(1)" class="tab-btn">📦 स्टॉक</button>
+        <button onclick="showTab(2)" class="tab-btn">💰 विक्री</button>
+        <button onclick="showTab(3)" class="tab-btn">📜 रिपोर्ट</button>
+      </div>
 
-<h2>Labour Panel</h2>
+      <!-- Dashboard -->
+      <div id="tab-0" class="tab-content">
+        <div class="stats">
+          <div class="stat-card"><h3 id="total-stock">0</h3><p>कुल स्टॉक</p></div>
+          <div class="stat-card"><h3 id="today-sales">₹0</h3><p>आज की विक्री</p></div>
+        </div>
+        <button onclick="toggleShop()" id="shop-btn" class="big-btn">🚪 SHOP OPEN</button>
+      </div>
 
-<button id="openBtn" onclick="openShop()" class="big-btn open-btn">
-🚪 SHOP OPEN
-</button>
+      <!-- Stock Entry -->
+      <div id="tab-1" class="tab-content hidden">
+        <h2>📦 स्टॉक एंट्री</h2>
+        <select id="stock-product" class="input"></select>
+        <input type="number" id="stock-qty" placeholder="मात्रा" class="input" value="1">
+        <button onclick="addStock()" class="big-btn">✅ स्टॉक जोड़ें</button>
+        <div id="stock-list"></div>
+      </div>
 
-<button id="closeBtn" onclick="closeShop()" class="big-btn close-btn">
-🔒 SHOP CLOSE
-</button>
+      <!-- Sales -->
+      <div id="tab-2" class="tab-content hidden">
+        <h2>💰 विक्री एंट्री</h2>
+        <select id="sale-product" class="input"></select>
+        <input type="number" id="sale-qty" placeholder="मात्रा" class="input" value="1">
+        <button onclick="recordSale()" class="big-btn">✅ विक्री दर्ज करें</button>
+      </div>
 
-<div id="status"></div>
+      <!-- Reports -->
+      <div id="tab-3" class="tab-content hidden">
+        <h2>📜 रिपोर्ट्स</h2>
+        <div style="display:flex; gap:10px; margin:15px 0;">
+          <input type="date" id="from-date" class="input" style="flex:1;">
+          <input type="date" id="to-date" class="input" style="flex:1;">
+        </div>
+        <button onclick="exportToExcel()" class="big-btn" style="background:#2196F3;">📤 Excel Export</button>
+        <div id="report-list" style="margin-top:20px;"></div>
+        <button onclick="clearAllData()" id="clear-btn" class="btn danger hidden">🗑️ सारा डेटा क्लियर (Admin Only)</button>
+      </div>
 
-</div>
+      <button onclick="logout()" class="btn logout">🚪 Logout</button>
+    </div>
+  </div>
 
-</div>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
